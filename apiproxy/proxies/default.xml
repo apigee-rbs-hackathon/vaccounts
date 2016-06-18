@@ -10,7 +10,14 @@
         <Request/>
         <Response/>
     </PostFlow>
-    <Flows/>
+	<Flows>
+		<Flow name="Get Virtual Accounts">
+			<Request>
+				<!-- validate bearer token -->
+			</Request>
+			<Condition>proxy.pathsuffix = "/" AND request.verb = "GET"</Condition>
+		</Flow>
+	</Flows>
     <RouteRule name="node">
         <TargetEndpoint>default</TargetEndpoint>
     </RouteRule>    

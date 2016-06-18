@@ -2,10 +2,13 @@
   "name": "starter-node-example",
   "version": "0.0.1",
   "description": "Starter Node Project",
-  "main":"app.js",
+  "main": "app.js",
   "dependencies": {
-    "express":"4.13.3",
-    "body-parser":"1.14.1",
-    "apigee-access":"latest"
+    "apigee-access": "latest",
+    "async": "^1.5.2",
+    "body-parser": "1.14.1",
+    "express": "4.13.3",
+    "jwt-simple": "^0.5.0",
+    "request": "^2.72.0"
   }
 }
