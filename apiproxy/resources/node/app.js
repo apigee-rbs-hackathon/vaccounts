@@ -102,15 +102,16 @@ app.get('/', function(req,res){
 								txid: transaction.id
 							});
 							reportedTxs.push(transaction.id);
+							runningTotal+=transaction.transactionAmount;
+							return false;
 						}
-						runningTotal+=transaction.transactionAmount;
 					});
 				});
 
 				responsePayload.vaccounts.push({
 					name:item.name,
 					limit:item.limit,
-					balance:(item.limit-runningTotal).toFixed(2),
+					balance:(Number(item.limit) + Number(runningTotal)).toFixed(2),
 					txs:myTransactions
 				});
 			});
