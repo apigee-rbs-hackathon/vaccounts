@@ -15,7 +15,7 @@
         <TargetEndpoint>default</TargetEndpoint>
     </RouteRule>    
     <HTTPProxyConnection>
-        <BasePath>/starter-api</BasePath>
+		<BasePath>/v1/vaccounts</BasePath>
         <VirtualHost>default</VirtualHost>
     </HTTPProxyConnection>
 </ProxyEndpoint>

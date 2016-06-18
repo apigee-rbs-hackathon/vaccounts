@@ -3,9 +3,9 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>apigee</groupId>
-	<artifactId>starter-api</artifactId>
+	<artifactId>vaccounts</artifactId>
 	<version>-</version>
-	<name>starter-api</name>
+	<name>vaccounts</name>
 	<packaging>pom</packaging>
 
 	<pluginRepositories>
