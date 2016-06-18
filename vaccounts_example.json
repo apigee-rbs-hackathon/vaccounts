@@ -1,0 +1,20 @@
+{
+	"accId" : 12345,
+	"balance" : 300,
+	"vaccounts" : {
+		"bananas and blow" : {
+			"limit" : 100,
+			"txs" : [ 
+				{ "desc" : "bananas", "amount" : "1.5", "txdate" : "20160618" },
+				{ "desc" : "blow", "amount" : "30", "txdate" : "20160617" }
+			]
+		},
+		"groceries" : {
+			"limit": 200,
+			"txs" : [ 
+				{ "desc" : "lidl", "amount" : "65", "txdate" : "20160618" },
+				{ "desc" : "aldi", "amount" : "30", "txdate" : "20160617" }
+			]
+		}
+	}
+}
