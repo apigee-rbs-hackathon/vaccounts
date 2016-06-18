@@ -10,8 +10,7 @@
 				{ "desc" : "bananas", "payee": "123456", "amount" : "1.5", "txdate" : "20160618","txid" : "235235235" },
 				{ "desc" : "blow", "payee": "654321", "amount" : "30", "txdate" : "20160617", "txid" : "370923823" }
 			]
-		}
-		,
+		},
 		{
 			"name" : "groceries",
 			"limit": "200",
