@@ -5,11 +5,12 @@ var apigee = require('apigee-access');
 var jwt = require('jwt-simple');
 var async = require('async');
 var request = require('request');
+var _ = require('lodash');
 
 var app = express();
 
 app.options('*', function(req,res){
-	res.set({	
+	res.set({
 		'Access-Control-Allow-Origin': "*",
 		'Access-Control-Allow-Methods': "*",
 		'Access-Control-Allow-Headers': "*",
@@ -22,7 +23,7 @@ app.get('/', function(req,res){
 
 	//mock stuff from VerifyToken
 	apigee.setVariable(req, "rbs.custom.jwt", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjdXN0b21lcklkIjoiNTc1ZmNmZWRhZDljZGM5ZTEyZjM4ZTYzIiwicm9sZSI6InVzZXIiLCJwcmltYXJ5U3Vic2NyaWJlcktleSI6IjZjYzQ3ZTcwNTg1MTQxOWI4ZjUzNWY1MGI4YWJiNmY2IiwiaWF0IjoxNDY2MjU2MDQwfQ.59d1_eTaItl2oG6b5kU5lLQOMu1lUNO-xUVsi6ZWNe4");
-	apigee.setVariable(req, "rbs.custom.primarykey", "6cc47e705851419b8f535f50b8abb6f6");	
+	apigee.setVariable(req, "rbs.custom.primarykey", "6cc47e705851419b8f535f50b8abb6f6");
 	apigee.setVariable(req, "rbs.cache.currentAccountId", "575fcfedad9cdc9e12f38e64");
 
 	//decode JWT
@@ -38,7 +39,7 @@ app.get('/', function(req,res){
 			request({
 				url:'https://bluebank.azure-api.net/api/v0.6.3/accounts/' + currentAccountId + '/transactions?sortOrder=-transactionDateTime&offset=0&limit=25',
 				headers:{
-					Bearer: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjdXN0b21lcklkIjoiNTc1ZmNmZWRhZDljZGM5ZTEyZjM4ZTYzIiwicm9sZSI6InVzZXIiLCJwcmltYXJ5U3Vic2NyaWJlcktleSI6IjZjYzQ3ZTcwNTg1MTQxOWI4ZjUzNWY1MGI4YWJiNmY2IiwiaWF0IjoxNDY2MjU3OTM2fQ.KZ0Wkhjn6JcU99DECDdNZSv8mBFQvdlyQCCKCnhRAVM", 
+					Bearer: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjdXN0b21lcklkIjoiNTc1ZmNmZWRhZDljZGM5ZTEyZjM4ZTYzIiwicm9sZSI6InVzZXIiLCJwcmltYXJ5U3Vic2NyaWJlcktleSI6IjZjYzQ3ZTcwNTg1MTQxOWI4ZjUzNWY1MGI4YWJiNmY2IiwiaWF0IjoxNDY2MjU3OTM2fQ.KZ0Wkhjn6JcU99DECDdNZSv8mBFQvdlyQCCKCnhRAVM",
 				'Ocp-Apim-Subscription-Key': "6cc47e705851419b8f535f50b8abb6f6"
 				}
 			}, function (error, response, body) {
@@ -64,7 +65,7 @@ app.get('/', function(req,res){
 			request({
 				url:'https://bluebank.azure-api.net/api/v0.6.3/accounts/' + currentAccountId,
 			headers:{
-				Bearer: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjdXN0b21lcklkIjoiNTc1ZmNmZWRhZDljZGM5ZTEyZjM4ZTYzIiwicm9sZSI6InVzZXIiLCJwcmltYXJ5U3Vic2NyaWJlcktleSI6IjZjYzQ3ZTcwNTg1MTQxOWI4ZjUzNWY1MGI4YWJiNmY2IiwiaWF0IjoxNDY2MjU3OTM2fQ.KZ0Wkhjn6JcU99DECDdNZSv8mBFQvdlyQCCKCnhRAVM", 
+				Bearer: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjdXN0b21lcklkIjoiNTc1ZmNmZWRhZDljZGM5ZTEyZjM4ZTYzIiwicm9sZSI6InVzZXIiLCJwcmltYXJ5U3Vic2NyaWJlcktleSI6IjZjYzQ3ZTcwNTg1MTQxOWI4ZjUzNWY1MGI4YWJiNmY2IiwiaWF0IjoxNDY2MjU3OTM2fQ.KZ0Wkhjn6JcU99DECDdNZSv8mBFQvdlyQCCKCnhRAVM",
 			'Ocp-Apim-Subscription-Key': "6cc47e705851419b8f535f50b8abb6f6"
 			}
 			}, function (error, response, body) {
@@ -92,17 +93,18 @@ app.get('/', function(req,res){
 				var myTransactions = [];
 				transactions.forEach(function(transaction){
 					//tag name is in tx description
-					if(transaction.transactionDescription.toLowerCase().indexOf(item.name.toLowerCase())>-1){
-						myTransactions.push({
-							desc: transaction.transactionDescription,
-							amount: (transaction.transactionAmount).toFixed(2),
-							txdate: transaction.transactionDateTime,
-							txid: transaction.id
-						});
-						runningTotal+=transaction.transactionAmount;
-						reportedTxs.push(transaction.id);
-					}	
-
+					_.forEach( item.tags,function(i)  {
+						if(transaction.transactionDescription.toLowerCase().indexOf(i.toLowerCase())>-1){
+							myTransactions.push({
+								desc: transaction.transactionDescription,
+								amount: (transaction.transactionAmount).toFixed(2),
+								txdate: transaction.transactionDateTime,
+								txid: transaction.id
+							});
+							runningTotal+=transaction.transactionAmount;
+							reportedTxs.push(transaction.id);
+						}
+					});
 				});
 
 				responsePayload.vaccounts.push({
@@ -134,7 +136,7 @@ app.get('/', function(req,res){
 						txid: transaction.id
 					});
 				}
-			});	
+			});
 			responsePayload.vaccounts.push({
 				name:"Other",
 				limit:null,
@@ -163,9 +165,9 @@ app.get('/', function(req,res){
 	});
 
 
-	//return response	
+	//return response
 
-	//res.status(200).send("OK:" +JSON.stringify(decoded)); 
+	//res.status(200).send("OK:" +JSON.stringify(decoded));
 });
 
 
