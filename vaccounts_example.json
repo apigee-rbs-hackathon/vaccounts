@@ -4,19 +4,21 @@
 	"vaccounts" : [
 		{
 			"name" : "bananas and blow",
-			"limit" : 100,
+			"limit" : "100",
+			"balance" : "68.5",
 			"txs" : [
-				{ "desc" : "bananas", "payee" : 123456, "amount" : "1.5", "txdate" : "20160618" },
-				{ "desc" : "blow", "payee" : 654321, "amount" : "30", "txdate" : "20160617" }
+				{ "desc" : "bananas", "payee": "123456", "amount" : "1.5", "txdate" : "20160618" },
+				{ "desc" : "blow", "payee": "654321", "amount" : "30", "txdate" : "20160617" }
 			]
 		}
 		,
 		{
 			"name" : "groceries",
-			"limit": 200,
+			"limit": "200",
+			"balance": "105",
 			"txs" : [
-				{ "desc" : "lidl", "payee" : 3462352, "amount" : "65", "txdate" : "20160618" },
-				{ "desc" : "aldi", "payee" : 73452311, "amount" : "30", "txdate" : "20160617" }
+				{ "desc" : "lidl", "payee": "3462352", "amount" : "65", "txdate" : "20160618" },
+				{ "desc" : "aldi", "payee": "73452311", "amount" : "30", "txdate" : "20160617" }
 			]
 		}
 	]
