@@ -101,9 +101,9 @@ app.get('/', function(req,res){
 								txdate: transaction.transactionDateTime,
 								txid: transaction.id
 							});
-							runningTotal+=transaction.transactionAmount;
 							reportedTxs.push(transaction.id);
 						}
+						runningTotal+=transaction.transactionAmount;
 					});
 				});
 
