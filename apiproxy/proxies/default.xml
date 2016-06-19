@@ -29,7 +29,7 @@
         <TargetEndpoint>default</TargetEndpoint>
     </RouteRule>    
     <HTTPProxyConnection>
-		<BasePath>/v1/vaccounts-sean</BasePath>
+		<BasePath>/v1/vaccounts</BasePath>
         <VirtualHost>default</VirtualHost>
     </HTTPProxyConnection>
 </ProxyEndpoint>

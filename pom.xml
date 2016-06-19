@@ -5,7 +5,7 @@
 	<groupId>apigee</groupId>
 	<artifactId>vaccounts</artifactId>
 	<version>-</version>
-	<name>vaccounts-sean</name>
+	<name>vaccounts</name>
 	<packaging>pom</packaging>
 
 	<pluginRepositories>
