@@ -70,7 +70,7 @@ app.get('/', function(req,res){
 			}, function (error, response, body) {
 				if (!error && response.statusCode == 200) {
 					var account = JSON.parse(body);
-					callback(null, transactions, vaccounts, account.accountBalance);
+					callback(null, transactions, vaccounts, account.accountBalance, account.accountNumber);
 				}
 				else {
 					callback("Oops");
@@ -79,9 +79,10 @@ app.get('/', function(req,res){
 
 		},
 		//mediate
-		function(transactions, vaccounts, accountBalance, callback) {
+		function(transactions, vaccounts, accountBalance, accNumber, callback) {
 			var responsePayload = {};
 			responsePayload.accId = currentAccountId;
+			responsePayload.accNo = accNumber;
 			responsePayload.balance = accountBalance.toFixed(2);
 			responsePayload.vaccounts = [];
 
