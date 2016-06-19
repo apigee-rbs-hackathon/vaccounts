@@ -1,0 +1,5 @@
+<OAuthV2 async="false" continueOnError="false" enabled="true" name="ValidateAccessToken">
+	<DisplayName>ValidateAccessToken</DisplayName>
+	<Operation>VerifyAccessToken</Operation>
+	<AccessTokenPrefix>Bearer</AccessTokenPrefix> <!-- Optional, default is Bearer -->
+</OAuthV2>

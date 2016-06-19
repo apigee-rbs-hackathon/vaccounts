@@ -1,0 +1,11 @@
+<LookupCache async="false" continueOnError="false" enabled="true" name="Cache.GetCurrentAccount">
+	<DisplayName>Cache.GetCurrentAccount</DisplayName>
+	<Properties/>
+	<CacheKey>
+		<KeyFragment ref="accesstoken.customerId"/>
+	</CacheKey>
+	<CacheResource>CashyCache</CacheResource>
+	<!-- Omit this element if you're using the included shared cache. -->
+	<Scope>Global</Scope>
+	<AssignTo>rbs.cache.currentAccountId</AssignTo>
+</LookupCache>
