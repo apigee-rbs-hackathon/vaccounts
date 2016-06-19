@@ -6,6 +6,7 @@
 		<Request>
 			<Step>
 				<Name>ValidateAccessToken</Name>
+				<Condition>request.verb != "OPTIONS"</Condition>
 			</Step>
 		</Request>
         <Response/>
@@ -15,6 +16,15 @@
         <Response/>
     </PostFlow>
 	<Flows>
+		<Flow name="OptionsPreFlight">
+      <Request/>
+      <Response>
+          <Step>
+             <Name>AssignMessage-AddCors</Name>
+          </Step>
+       </Response>
+      <Condition>request.verb == "OPTIONS"</Condition>
+    </Flow>
 		<Flow name="Get Virtual Accounts">
 			<Request>
 				<!-- get current account from cache -->
@@ -25,6 +35,9 @@
 			<Condition>proxy.pathsuffix MatchesPath "/" AND request.verb = "GET"</Condition>
 		</Flow>
 	</Flows>
+    <RouteRule name="NoRoute">
+			<Condition>request.verb == "OPTIONS"</Condition>
+    </RouteRule>    
     <RouteRule name="node">
         <TargetEndpoint>default</TargetEndpoint>
     </RouteRule>    
